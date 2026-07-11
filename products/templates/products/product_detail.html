@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+خرید {{ product.name }}
+{% if product.volume_liter %}
+{{ product.volume_liter }} لیتری
+{% endif %}
+| فروشگاه هراچیک
+{% endblock %}
+
+{% block meta_description %}
+خرید {{ product.name }}
+{% if product.volume_liter %}
+{{ product.volume_liter }} لیتری،
+{% endif %}
+با کیفیت بالا، ارسال سریع و قیمت مناسب. مشاهده خواص، نحوه مصرف و شرایط نگهداری.
+{% endblock %}
+
+{% block og_image %}
+{% if product.image %}
+<meta property="og:image" content="{{ product.image.url }}">
+{% endif %}
+{% endblock %}
+
+<!-- معرفی محصول به گوگل -->
+
+{% block extra_meta %}
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Product",
+
+  "name":"{{ product.name }}",
+
+  "image":[
+    "{{ request.scheme }}://{{ request.get_host }}{{ product.image.url }}"
+  ],
+
+  "description":"{{ product.description|striptags|truncatechars:250 }}",
+
+  "brand":{
+      "@type":"Brand",
+      "name":"{{ product.brand }}"
+  },
+
+  "sku":"{{ product.id }}",
+
+  "offers":{
+      "@type":"Offer",
+
+      "priceCurrency":"IRR",
+
+      "price":"{% if product.discount_price %}{{ product.discount_price }}{% else %}{{ product.price }}{% endif %}",
+
+      "availability":"https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+
+      "url":"{{ request.build_absolute_uri }}"
+  }
+
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<section class="product-detail-page py-2">
+    <div class="container">
+
+        <!-- Hero Section -->
+        <div class="row align-items-center gx-lg-5 gy-4">
+            <div class="col-lg-5 text-center">
+                <div class="product-detail-wrap">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded-4 shadow-sm product-detail-image">
+                {% else %}
+                    <img src="{% static 'products/images/bottle-transparent.png' %}" alt="{{ product.name }}" class="img-fluid rounded-4 shadow-sm product-detail-image">
+                {% endif %}
+                </div>
+            </div>
+
+            <div class="col-lg-7 text-end product-detail">
+                
+                <h1 class="dk-title  mb-1 ">
+                            {{ product.name }}
+                            {% if product.volume_liter %}
+                                {{ product.volume_liter }} لیتری
+                            {% endif %}
+                </h1>
+
+                 <div class="dk-price  mb-2">
+                            {% if product.discount_price %}
+                                <span class="old-price d-block">{{ product.price|intcomma }} تومان</span>
+                                <span class="new-price d-block mt-1">{{ product.discount_price|intcomma }} تومان</span>
+                            {% else %}
+                                <span class="normal-price">{{ product.price|intcomma }} تومان</span>
+                            {% endif %}
+                        </div>
+
+                {% if product.description %}
+                    <p class=" text-secondary  mb-4 text-description">{{ product.description }}</p>
+                {% endif %}
+
+                <div class="d-flex flex-wrap gap-3 justify-content-end mt-3 product-actions">
+<button
+  type="button"
+  class="dk-btn btn-primary-dk flex-fill py-2 small open-product-offcanvas"
+  data-product-id="{{ product.id }}"
+  data-product-name="{{ product.name }}"
+  data-prices='[
+  {% for cp in product.active_container_prices %}
+  {
+    "id": {{ cp.id }},
+    "label":"{{ cp.get_container_type_display }}",
+    "price":{{ cp.price }},
+    "volume":{{ cp.container_type|cut:"L" }}
+
+  }{% if not forloop.last %},{% endif %}
+  {% endfor %}
+  ]'
+
+>
+ثبت سفارش
+</button>
+
+                    <a href="#health-info" class="btn btn-outline-success px-4 py-2">
+                        مشاهده خواص و نحوه مصرف
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Health Info Section -->
+        <section id="health-info" class="mb-5">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold title">دانستنی‌های {{ product.name }}</h2>
+                <p class="text-muted text-subtitle ">خواص، نحوه و زمان مصرف این محصول را در ادامه بخوانید.</p>
+            </div>
+
+            <div class="accordion" id="productInfoAccordion">
+
+                {% if product.benefits.exists %}
+                <div class="accordion-item border-0 shadow-sm rounded-4 mb-3 overflow-hidden">
+                    <h2 class="accordion-header" id="headingBenefits">
+                        <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBenefits" aria-expanded="true" aria-controls="collapseBenefits">
+                            خواص محصول
+                        </button>
+                    </h2>
+                    <div id="collapseBenefits" class="accordion-collapse collapse show" aria-labelledby="headingBenefits" data-bs-parent="#productInfoAccordion">
+                        <div class="accordion-body">
+                           
+                                <ul class="list-unstyled mb-0">
+                                    {% for benefit in product.benefits.all %}
+                                        <li>
+                                            {% if benefit.icon %}
+                                                <i class="{{ benefit.icon }} ms-1"></i>
+                                            {% endif %}
+                                            {{ benefit.title }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                          
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if product.usage_time %}
+                <div class="accordion-item border-0 shadow-sm rounded-4 mb-3 overflow-hidden">
+                    <h2 class="accordion-header" id="headingTime">
+                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTime" aria-expanded="false" aria-controls="collapseTime">
+                            بهترین زمان مصرف
+                        </button>
+                    </h2>
+                    <div id="collapseTime" class="accordion-collapse collapse" aria-labelledby="headingTime" data-bs-parent="#productInfoAccordion">
+                        <div class="accordion-body">
+                            {{ product.usage_time|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if product.usage_instruction %}
+                <div class="accordion-item border-0 shadow-sm rounded-4 mb-3 overflow-hidden">
+                    <h2 class="accordion-header" id="headingUsage">
+                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUsage" aria-expanded="false" aria-controls="collapseUsage">
+                            نحوه مصرف
+                        </button>
+                    </h2>
+                    <div id="collapseUsage" class="accordion-collapse collapse" aria-labelledby="headingUsage" data-bs-parent="#productInfoAccordion">
+                        <div class="accordion-body">
+                            {{ product.usage_instruction|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if product.storage_condition %}
+                <div class="accordion-item border-0 shadow-sm rounded-4 mb-3 overflow-hidden">
+                    <h2 class="accordion-header" id="headingCautions">
+                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCautions" aria-expanded="false" aria-controls="collapseCautions">
+                           شرایط نگهداری
+                        </button>
+                    </h2>
+                    <div id="collapseCautions" class="accordion-collapse collapse" aria-labelledby="headingCautions" data-bs-parent="#productInfoAccordion">
+                        <div class="accordion-body">
+                            {{ product.storage_condition|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+        </section>
+
+        <!-- Related Products -->
+        <!-- {% if related_products %}
+        <section class="related-products">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">محصولات مرتبط</h2>
+                <p class="text-muted">محصولات دیگری که ممکن است برای شما مفید باشند.</p>
+            </div>
+
+            <div class="row g-4">
+                {% for item in related_products %}
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm rounded-4">
+                        <a href="{% url 'shop:product_detail' item.slug %}">
+                            <img src="{{ item.image.url }}" class="card-img-top rounded-top-4" alt="{{ item.name }}">
+                        </a>
+                        <div class="card-body text-center">
+                            <a href="{% url 'shop:product_detail' item.slug %}" class="text-decoration-none text-dark">
+                                <h6 class="fw-bold">{{ item.name }}</h6>
+                            </a>
+                            {% if item.final_price %}
+                                <p class="text-danger mb-0">{{ item.final_price }} تومان</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %} 
+
+    </div>
+</section>
+{% endblock %}

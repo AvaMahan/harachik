@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+درباره ما | فروشگاه هراچیک
+{% endblock %}
+
+{% block meta_description %}
+با فروشگاه هراچیک و فعالیت ما در زمینه تولید و عرضه عرقیجات گیاهی بیشتر آشنا شوید.
+{% endblock %}
+
+{% block content %}
+<section class="about-detail-page py-5">
+    <div class="container">
+
+
+      <!-- Story Section with Old Photo -->
+<div class="row align-items-center g-4 mb-5 brand-story-section">
+
+    <!-- عکس -->
+    <div class="col-lg-5">
+
+        <div class="story-image-wrapper">
+
+            <img src="{% static 'images/maval.jpg' %}"
+                 alt="شروع مزارع هراجیک"
+                 class="story-image">
+
+            <div class="story-badge">
+                شروع مسیر — سال‌ها پیش
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- متن -->
+    <div class="col-lg-7">
+
+        <div class="story-content">
+
+            <h2 class="story-title">
+                داستان شکل‌گیری مزرعه  
+            </h2>
+
+            <p>
+             مزرعه گل محمدی از سال‌ها پیش در روستای دره‌گل یزد با تمرکز بر کشت طبیعی گل محمدی شکل گرفت.
+از همان ابتدا، کیفیت محصول و حفظ اصالت منطقه مهم‌ترین اصل ما بود
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row mb-5 brand-story-section">
+    <div class="col-lg-11 col-xl-10 mx-auto">
+
+        <div class="p-3 p-md-4 bg-white rounded-4 shadow-sm text-center story-card-premium">
+
+            <div class="location-icon mb-2">
+                <i class="fas fa-mountain text-success"></i>
+            </div>
+
+            <h2 class="fw-bold mb-3 story-title-modern">
+                موقعیت جغرافیایی و اقلیم منحصربه‌فرد
+            </h2>
+
+            <div class="content-wrapper">
+
+                <p class="text-muted lh-lg lead-text mb-4">
+                    مزارع هراجیک در روستای
+                    <span class="highlight-green">دره‌گل یزد</span>
+                    و در منطقه‌ای کوهستانی با آب‌وهوای خنک و پاک قرار دارند؛
+                    شرایطی که باعث رشد گل محمدی با عطر و کیفیت طبیعی می‌شود.
+                </p>
+
+                <div class="divider-custom mx-auto mb-3"></div>
+
+                <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+
+                    <span class="badge rounded-pill bg-light text-dark px-3 py-2 border">
+                        ⛰ ارتفاع مناسب
+                    </span>
+
+                    <span class="badge rounded-pill bg-light text-dark px-3 py-2 border">
+                        💧 آب کوهستانی
+                    </span>
+
+                    <span class="badge rounded-pill bg-light text-dark px-3 py-2 border">
+                        🌿 خاک غنی
+                    </span>
+
+                    <span class="badge rounded-pill bg-light text-dark px-3 py-2 border">
+                        🌸 عطر طبیعی بیشتر
+                    </span>
+
+                </div>
+
+                <p class="quote-text mb-0">
+                    طبیعت این منطقه، بخش مهمی از اصالت محصولات هراجیک را می‌سازد.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- New Farm Section -->
+<div class="row align-items-center g-4 mb-5 brand-story-section">
+
+    <!-- تصویر -->
+    <div class="col-lg-6">
+        <div class="story-image-wrapper">
+
+            <img src="{% static 'images/maz.jpg' %}"
+                 alt="مزرعه جدید گل محمدی"
+                 class="img-fluid rounded-4 shadow-sm story-image">
+
+            <div class="story-badge">
+                توسعه یافته و استاندارد امروز
+            </div>
+
+        </div>
+    </div>
+
+     <!-- متن -->
+    <div class="col-lg-6">
+        <div class="today-farm-content h-100">
+
+            <h2 class="fw-bold mb-3 story-title">
+                مزرعه امروز ما
+            </h2>
+
+            <p class="text-muted lh-lg mb-3">
+              امروز با توسعه مزرعه و استفاده از روش‌های اصولی برداشت و تقطیر،
+محصولاتی خالص، خوش‌عطر و قابل اعتماد را مستقیم از مزرعه به دست مشتریان می‌رسانیم.
+            </p>
+
+    
+        </div>
+    </div>
+</div>
+
+        <div class="row mb-5">
+            <div class="col-12 text-center mb-4">
+                <h2 class="fw-bold">۳. فرآیند تولید</h2>
+                <p class="text-muted">تعهد ما به کیفیت، از گل تا محصول نهایی</p>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="h-100 p-4 bg-white rounded-4 shadow-sm text-center">
+                    <div class="fs-1 mb-3">🌸</div>
+                    <h5 class="fw-bold mb-3">برداشت سنتی</h5>
+                    <p class="text-muted mb-0">
+                        گل‌ها در سپیده‌دم و قبل از طلوع آفتاب چیده می‌شوند تا عطر آن‌ها حفظ شود.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="h-100 p-4 bg-white rounded-4 shadow-sm text-center">
+                    <div class="fs-1 mb-3">💧</div>
+                    <h5 class="fw-bold mb-3">تقطیر اصولی</h5>
+                    <p class="text-muted mb-0">
+                        ما از روش‌های سنتی با تجهیزات بهداشتی استفاده می‌کنیم تا خلوص محصول ۱۰۰٪ حفظ شود.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="h-100 p-4 bg-white rounded-4 shadow-sm text-center">
+                    <div class="fs-1 mb-3">✅</div>
+                    <h5 class="fw-bold mb-3">بدون افزودنی</h5>
+                    <p class="text-muted mb-0">
+                        در هراجیک، هیچ اسانس مصنوعی یا ماده افزودنی به محصولات اضافه نمی‌شود.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="p-4 p-md-5 rounded-4 shadow-sm text-center text-md-end" style="background: #f8f6f1;">
+                    <h2 class="fw-bold mb-4">۴. ارزش‌ها و مأموریت</h2>
+                    <p class="lh-lg mb-0 text-muted">
+                        مأموریت ما ساده است: رساندن مستقیم محصول از مزرعه به سفره شما، بدون واسطه
+                        و با تضمین اصالت. ما معتقدیم سلامتی حق هر خانواده ایرانی است.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
+

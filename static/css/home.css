@@ -1,0 +1,182 @@
+
+/* استایل اصلی فیلترها */
+/* عنوان و زیرعنوان */
+.remedy-header {
+    text-align: right;
+    border-right: 4px solid #28a745;
+    padding-right: 15px;
+}
+
+.remedy-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+
+.remedy-subtitle {
+    font-size: 0.85rem;
+    color: #777;
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+/* ظرف اسکرول */
+.remedy-filter-scroll {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 10px 5px;
+    scrollbar-width: none; /* Firefox */
+}
+
+.remedy-filter-scroll::-webkit-scrollbar {
+    display: none; /* Chrome */
+}
+
+/* استایل دکمه‌های جدید */
+.filter-btn {
+  display: inline-flex;
+    align-items: center; /* این خط تراز عمودی را تنظیم می‌کند */
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid #eee;
+    color: #444;
+    padding: 10px 18px;
+    border-radius: 15px;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+}
+
+/* اصلاح فاصله آیکون (i) از متن */
+.filter-btn i {
+    font-size: 1.1rem;  /* کمی بزرگتر برای وضوح بیشتر */
+    align-items: center;
+    color:#28a745;
+        margin-left: 8px; 
+    line-height: 0; /* اضافه کردن این خط باعث می‌شود فضای اضافه دور آیکون حذف شود و دقیق وسط بایستد */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* دکمه فعال */
+.filter-btn.active {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+.filter-btn.active i  {
+    color: white;
+ 
+}
+/* هاور دکمه */
+.filter-btn:hover {
+    background-color: #f0fdf4; /* سبز خیلی روشن */
+    border-color: #28a745;
+    color: #28a745;
+    transform: translateY(-2px);
+}
+
+/* دکمه فعال (Selected) */
+.filter-btn.active {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.25);
+    font-weight: bold;
+}
+
+/* موبایل */
+@media (max-width: 768px) {
+    .remedy-filter-wrapper {
+    margin-bottom: 12px !important;
+}
+
+    .remedy-filter-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 8px;
+        position: relative;
+        
+    }
+
+    .filter-btn {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+         padding: 7px 14px;
+         min-height: 42px;
+        font-size: 0.82rem;
+        border-radius: 12px;
+        gap: 5px;
+    }
+      .filter-btn i {
+        font-size: 0.95rem;
+        margin-left: 5px;
+    }
+
+
+    /* نمایش بخشی از دکمه بعدی */
+    .remedy-filter-scroll::after {
+        content: "";
+        position: sticky;
+        left: 0;
+        width: 40px;
+        height: 100%;
+        background: linear-gradient(to left, rgba(255,255,255,0), #fff);
+        pointer-events: none;
+    }
+    .remedy-filter-scroll::before {
+    content: "←";
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #28a745;
+    font-size: 14px;
+    opacity: 0.7;
+    animation: swipeHint 1.5s infinite;
+}
+
+@keyframes swipeHint {
+    0% {
+        transform: translateY(-50%) translateX(0);
+    }
+    50% {
+        transform: translateY(-50%) translateX(-6px);
+    }
+    100% {
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+       .remedy-filter-scroll {
+        animation: scrollHint 1.8s ease-in-out 2;
+        padding-inline: 10px;
+    }
+
+    @keyframes scrollHint {
+        0% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(-18px);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+.remedy-filter-scroll::-webkit-scrollbar {
+    height: 3px;
+}
+
+.remedy-filter-scroll::-webkit-scrollbar-thumb {
+    background: #dcdcdc;
+    border-radius: 10px;
+}
+
+}

@@ -1,0 +1,338 @@
+.product-detail-page{
+  background: #fffdf9;
+}
+.product-detail-page .hero-section .col-lg-7{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;              /* فاصله بین آیتم‌ها */
+}
+
+/* تصویر */
+.product-detail-wrap{
+  width: 100%;
+  max-width: 280px;
+  margin-inline: auto;
+  padding: 14px;
+  border-radius: 26px;
+   box-shadow: 0 10px 26px rgba(17,24,39,.06);
+  border: 1px solid rgba(0,0,0,.035);
+  background: #fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.product-detail-image{
+  width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  display:block;
+}
+
+/* تیتر و قیمت (همون حس باکس قیمت) */
+.product-detail .dk-title{
+  color: #065f46; 
+  font-size: 22px;
+  line-height: 1.7;
+  font-weight: 700;
+}
+
+.product-detail .dk-price{
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 18px;
+  border-radius: 16px;
+  background: #eaf3ee;          /* شبیه باکس سبز روشن */
+  border: 1px solid rgba(18, 76, 52, .08);
+  min-width: 190px;
+    margin: 0 auto;                 /* وسط ستون */
+  box-shadow: 0 10px 22px rgba(17,24,39,.05);
+}
+
+.product-detail .old-price{
+  color:#8b8b8b;
+  text-decoration: line-through;
+  font-size: .95rem;
+}
+
+.product-detail .new-price,
+.normal-price{
+  color:#1b7f57;
+  font-weight: 900;
+  font-size: 1.35rem;
+}
+
+ 
+  .text-description{
+color: #374151;     /* خوانا و تمیز */
+    font-size: 15px;
+    line-height: 2;
+    font-weight: 400;
+  }
+/* دکمه‌ها (نزدیک به تصویر) */
+.product-detail-page .btn-success{
+  background:#1b7f57;
+  border: 0;
+  border-radius: 14px;
+  padding: 10px 22px;
+}
+
+.product-detail-page .btn-outline-success{
+  border-radius: 14px;
+  border-width: 1.5px;
+  padding: 10px 22px;
+}
+.product-detail-page .hero-section .btn{
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+
+/* آکاردئون (ساده ولی شیک) */
+#health-info {
+  margin-top: 58px;
+    
+}
+
+#health-info .title{
+  color: #065f46;          /* سبزِ تیره (هماهنگ با رنگ برند) */
+    font-weight: 800;        /* وزن سنگین برای خوانایی و اهمیت */
+    margin-bottom: 8px;      /* فاصله کم با زیرعنوان */
+    text-align: center;
+    line-height: 1.4;
+    font-size: 24px;
+}
+#health-info .text-subtitle{
+   color: #4b5563; /* یک خاکستری ملایم‌تر برای تضاد با عنوان اصلی */
+    margin-top: 8px !important;
+    margin-bottom: 24px !important;
+     font-size: 15px !important;
+}
+
+.product-detail-page .accordion{
+  margin-top: 1.2rem;
+}
+
+.accordion-item{
+  border: 0 !important;
+  border-radius: 18px !important;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 22px rgba(17,24,39,.05);
+  margin-bottom: 14px;
+}
+
+.accordion-button{
+  background: #fff;
+  color: #223127;
+  box-shadow: none !important;
+  font-weight: 800;
+  padding: 16px 18px;
+}
+
+.accordion-button:not(.collapsed){
+  background: #f4f7f5;
+  color: #1b7f57;
+}
+
+.accordion-body{
+  line-height: 2.1;
+  color: #5a5a5a;
+  padding: 16px 18px 20px;
+}
+
+/* خواص دو ستونه در دسکتاپ */
+.accordion-body ul.list-unstyled{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 10px 16px;
+  margin:0;
+  padding:0;
+}
+
+@media (min-width: 992px){
+  .accordion-body ul.list-unstyled{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.accordion-body ul.list-unstyled li{
+  position: relative;
+  padding-right: 26px;
+  color:#394150;
+}
+
+.accordion-body ul.list-unstyled li::before{
+  content:"✓";
+  position:absolute;
+  right:0;
+  top:6px;
+  width:18px;
+  height:18px;
+  border-radius: 6px;
+  background: rgba(27,127,87,.12);
+  color:#1b7f57;
+  font-size: 12px;
+  font-weight: 900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+/* =========================
+   Product Info Accordion
+   ========================= */
+
+#health-info .accordion-item{
+  border: 0 !important;
+  border-radius: 18px !important;
+  overflow: hidden;
+  background: #fff;
+
+  /* از shadow-sm بوتسترپ نرم‌تر و شیک‌تر */
+  box-shadow: 0 10px 22px rgba(17,24,39,.05) !important;
+}
+
+#health-info .accordion-button{
+  padding: 16px 18px;
+  font-weight: 800;
+  color: #223127;
+  background: #ffffff;
+  box-shadow: none !important;
+  border: 0;
+}
+
+#health-info .accordion-button:hover{
+  background: #fbfdfc;
+}
+
+#health-info .accordion-button:focus{
+  box-shadow: none !important;
+  outline: 0;
+}
+
+/* حالت باز */
+#health-info .accordion-button:not(.collapsed){
+  color: #1b7f57;
+  background: #f3faf6;
+}
+
+/* فلش (chevron) */
+#health-info .accordion-button::after{
+  opacity: .9;
+  filter: none;
+}
+
+/* بدنه */
+#health-info .accordion-body{
+  padding: 16px 18px 20px;
+  color: #515b67;
+  line-height: 2.05;
+  background: #fff;
+}
+
+/* ===== Benefits list (خواص) ===== */
+#health-info #collapseBenefits .accordion-body .list-unstyled{
+  display: grid;
+  grid-template-columns: 1fr;   /* موبایل: تک ستونه */
+  gap: 10px 28px;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* تیک سفارشی */
+#health-info #collapseBenefits .accordion-body .list-unstyled li::before{
+  content: "✓";
+  position: absolute;
+  right: 0;
+  top: 6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  background: rgba(27,127,87,.12);
+  color: #1b7f57;
+  font-size: 12px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* اگر icon دیتابیس میاد، برای جلوگیری از دو آیکن */
+#health-info #collapseBenefits .accordion-body .list-unstyled li i{
+  display: none;
+}
+
+
+/* موبایل */
+@media (max-width: 768px){
+  .product-detail-image{ max-height: 240px; }
+  .dk-price{ width:100%; min-width: auto; }
+  .product-detail-wrap{ max-width: 240px; }
+
+   /* container دکمه‌ها */
+  .product-detail .product-actions{
+    display: flex !important;
+    flex-direction: column !important;   /* زیر هم */
+    align-items: center;                  /* وسط چین */
+    gap: 12px !important;
+    width: 100%;
+  }
+#health-info .text-subtitle{
+         font-size: 12px !important;
+        line-height: 1.6;
+        margin-top: 12px !important;
+}
+#health-info .title{
+  font-size: 24px;
+}
+  /* خود دکمه‌ها */
+  .product-detail .product-actions .btn{
+    width: 100% !important;              /* هم‌عرض */
+    max-width: 360px;                    /* اختیاری: خیلی کش نیاد روی گوشی‌های بزرگ */
+    min-height: 52px;
+    padding: 12px 14px !important;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;             /* متن وسط */
+    text-align: center;
+
+    white-space: normal !important;      /* متن کامل */
+    overflow: visible !important;
+    text-overflow: unset !important;
+    line-height: 1.35;
+    font-size: 14px;
+  }
+  .product-detail .dk-title{
+  color:hsl(155, 62%, 18%);
+  font-size:14px  }
+ 
+  .text-description{
+      color: #4b5563 !important;   /* خاکستری خوانا (نزدیک slate) */
+    font-size:14px;
+    line-height: 1.9;
+    font-weight: 500;
+    margin-bottom: 14px !important;
+  }
+
+  .price-box{
+    padding: 18px 16px;
+  }
+
+  .price-box .old-price{
+    font-size: 14px;
+    opacity: .8;
+  }
+
+  .price-box .new-price{
+    margin-top: 6px;
+    font-size: 22px;
+  }
+}

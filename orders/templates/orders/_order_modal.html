@@ -1,0 +1,158 @@
+<!-- Order Modal -->
+<div class="modal fade pt-5" id="orderModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content shadow border-0 rounded-4 overflow-hidden">
+
+      <div class="modal-header bg-light">
+        <div class="text-end w-100">
+          <h5 class="modal-title mb-1">ثبت درخواست تماس و خرید</h5>
+           
+
+    <small class="text-success d-block mt-1">
+      پس از ثبت درخواست، کارشناسان ما برای هماهنگی سفارش با شما تماس می‌گیرند.
+    </small>
+    <a href="tel:09133506837"
+   class="support-phone text-decoration-none">
+   📞 پشتیبانی: 09133506837
+</a>
+   
+        </div>
+   
+        <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-4">
+        <form id="orderForm">
+          <div class="alert alert-light border mb-3">
+
+    <div class="fw-bold mb-2">
+        خلاصه سفارش
+    </div>
+
+    <div id="orderCartSummary"></div>
+
+    <div class="border-top pt-2 mt-2">
+
+        جمع کل:
+        <span id="orderCartTotal"
+              class="fw-bold text-success">
+        </span>
+
+    </div>
+
+</div>
+          {% csrf_token %}
+
+          <div class="row g-3">
+            <!-- نام و موبایل -->
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-semibold">نام و نام خانوادگی</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                name="full_name"
+                placeholder="مثلاً: علی علوی"
+                required
+              >
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-semibold">موبایل</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                name="mobile"
+                inputmode="numeric"
+                placeholder="0913xxxxxxx"
+                required
+              >
+            </div>
+
+          
+            <!-- شهر -->
+            <div class="col-12">
+              <label class="form-label small fw-semibold">شهر</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                name="city"
+                id="orderCity"
+                placeholder="نام شهر خود را وارد کنید"
+                required
+              >
+            </div>
+
+            <!-- آدرس -->
+            <div class="col-12">
+              <label class="form-label small fw-semibold">آدرس</label>
+              <textarea
+                class="form-control form-control-sm"
+                name="address"
+                rows="2"
+                placeholder="آدرس دقیق یا تقریبی برای هماهنگی ارسال"
+              ></textarea>
+            </div>
+
+            <!-- توضیحات -->
+            <div class="col-12">
+              <label class="form-label small fw-semibold">توضیحات (اختیاری)</label>
+              <textarea
+                class="form-control form-control-sm"
+                name="note"
+                rows="2"
+                placeholder="مثلاً ساعت تماس، توضیح اضافه، درخواست خاص و ..."
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- شرایط ارسال -->
+          <div class="alert alert-light border small mt-3 mb-0 lh-lg" id="shippingRules" style="font-size: 0.8rem;">
+            <strong>شرایط ارسال:</strong><br>
+            <span id="ruleYazd">📍 <strong>یزد:</strong> بالای ۲ میلیون تومان ارسال رایگان؛ کمتر، تحویل حضوری.</span><br>
+            <span id="ruleOther">🚚 <strong>سایر شهرها:</strong> ارسال با باربری (هزینه با خریدار).</span>
+          </div>
+
+          <!-- پیام‌ها -->
+          <div class="alert alert-danger py-2 small mt-3 d-none" id="orderError"></div>
+          <div class="alert alert-success py small mt-3 d-none" id="orderSuccess">
+            درخواست با موفقیت ثبت شد. منتظر تماس ما باشید.
+          </div>
+
+          <button type="submit" id="submitBtn" class="btn btn-success w-100 mt-3 py-2 fw-semibold shadow-sm">
+                    ثبت درخواست خرید</button>
+                  
+
+<div id="otpBox" class="d-none mt-3">
+
+<div class="alert alert-warning small">
+برای اطمینان از صحت شماره و هماهنگی سفارش، کد تایید برای شما ارسال شد.
+</div>
+
+<label class="form-label small fw-semibold">
+    کد تایید
+</label>
+
+<input
+    type="text"
+    id="otpCode"
+    class="form-control"
+    maxlength="5"
+    pattern="\d{5}"
+    inputmode="numeric"
+    placeholder="کد ۵ رقمی"
+  
+>
+
+<button
+    type="button"
+    id="verifyOtpBtn"
+    class="btn btn-success w-100 mt-3 py-2 fw-semibold shadow-sm"
+>
+    تایید و ثبت نهایی سفارش
+</button>
+
+
+</div>
+</form>
+
+

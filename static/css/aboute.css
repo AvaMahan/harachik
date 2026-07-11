@@ -1,0 +1,367 @@
+/* 
+درباره مزرعه */
+/* کل سکشن */
+.about-farm-section {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #fff;
+}
+
+/* تراز عمودی ستون‌ها */
+.about-farm-section .row {
+    align-items: center;
+}
+
+/* تنظیمات عکس (ثابت طبق طرح) */
+.about-farm-img img {
+    width: 100%;
+    height: 380px; 
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+
+/* ظرف اصلی متن */
+.about-farm-inner {
+    max-width: 500px;
+    margin: 0 auto; /* قرارگیری کل بلوک متن در وسط ستون خودش */
+    text-align: center; /* وسط‌چین کردن تمام محتویات */
+}
+
+/* تیتر وسط‌چین */
+.about-farm-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #2E4A26;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* وسط‌چین کردن متن تیتر و آیکون */
+    gap: 10px;
+}
+
+/* متن پاراگراف وسط‌چین */
+.about-farm-text {
+    font-size: 15.5px;
+    color: #555;
+    line-height: 2.1;
+    margin-bottom: 30px;
+    text-align: center; /* تغییر از right به center مطابق طرح */
+}
+
+/* دکمه وسط‌چین */
+.about-farm-btn {
+    display: inline-flex; /* برای اینکه margin auto کار کند */
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: transparent;
+    border: 1px solid #9bb67d;
+    color: #3a5b29;
+    border-radius: 12px;
+    padding: 12px 35px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin: 0 auto; /* اطمینان از وسط‌چین بودن دکمه */
+}
+
+.about-farm-btn:hover {
+    background-color: #9bb67d;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+/* ---------- واکنش‌گرا (موبایل) ---------- */
+@media (max-width: 991px) {
+    .about-farm-img {
+        margin-bottom: 35px;
+    }
+    
+    .about-farm-img img {
+        height: 260px; /* ارتفاع کمتر برای موبایل */
+    }
+
+    .about-farm-title {
+        font-size: 22px;
+        font-weight: 800; /* ضخیم‌تر شدن تیتر */
+        margin-top: 15px; /* ایجاد فاصله کمی بیشتر از عکس */
+        margin-bottom: 20px;
+    }
+
+    .about-farm-text {
+        padding: 0 15px;
+          font-size: 14.5px; /* کمی بزرگتر برای خوانایی بیشتر در موبایل */
+        line-height: 2.2; /* فاصله خطوط بیشتر برای راحتی چشم */
+        color: #666; /* رنگ متن کمی ملایم‌تر برای حس مدرن‌تر */
+    }
+       .about-farm-btn {
+        padding: 10px 40px; /* دکمه کمی جمع‌وجورتر و شیک‌تر */
+        font-size: 15px;
+    }
+}
+
+/* about_detail */
+/* سکشن داستان برند */
+/* سکشن */
+/* =========================
+   ABOUT PAGE
+========================= */
+
+
+/* فاصله سکشن‌ها */
+.brand-story-section{
+    margin-bottom: 90px;
+}
+
+/* =========================
+   IMAGE
+========================= */
+
+.story-image-wrapper{
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.05);
+    background:#fff;
+}
+
+.story-image{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+    display:block;
+    transition: .5s ease;
+}
+
+.story-image-wrapper:hover .story-image{
+    transform:scale(1.03);
+}
+
+/* لیبل روی عکس */
+.story-badge{
+    position:absolute;
+    bottom:14px;
+    right:14px;
+
+    background:rgba(0,0,0,.65);
+    color:#fff;
+
+    padding:.55rem 1rem;
+
+    border-radius:50px;
+
+    font-size:.8rem;
+
+    backdrop-filter: blur(6px);
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.story-content{
+    max-width: 560px;
+    margin:auto;
+}
+
+.story-title{
+    font-size:2.2rem;
+    font-weight:800;
+    color:#1f1f1f;
+    margin-bottom:1.2rem;
+    line-height:1.5;
+}
+
+.story-content p{
+    color:#666;
+    line-height:2.2;
+    font-size:1rem;
+    margin-bottom:0;
+}
+
+/* =========================
+   GEO SECTION
+========================= */
+
+.story-card-premium{
+    background:#fff;
+    border-radius:28px;
+    padding:2.2rem 2rem;
+    box-shadow:0 8px 28px rgba(0,0,0,.04);
+    border:1px solid #f1f1f1;
+}
+
+.story-title-modern{
+    font-size:2rem;
+    font-weight:800;
+    color:#222;
+    margin-bottom:1rem;
+}
+
+.lead-text{
+    font-size:1.02rem;
+    line-height:2.2;
+    color:#666;
+    max-width:720px;
+    margin:auto;
+}
+
+/* جداکننده */
+.divider-custom{
+    width:60px;
+    height:2px;
+    background:#dcdcdc;
+}
+
+/* هایلایت */
+.highlight-green{
+    color:#2d6a4f;
+    font-weight:700;
+}
+
+/* ویژگی‌ها */
+.story-card-premium .badge{
+    border-radius:50px !important;
+    padding:.75rem 1rem !important;
+    background:#fafafa !important;
+    border:1px solid #ececec !important;
+    font-size:.9rem;
+    color:#444 !important;
+    font-weight:500;
+}
+
+/* متن پایانی */
+.quote-text{
+    color:#4f7a5f;
+    font-size:.95rem;
+    font-weight:600;
+}
+
+/* آیکون */
+.location-icon{
+    font-size:2rem;
+    opacity:.85;
+}
+
+/* =========================
+   TODAY FARM
+========================= */
+
+.today-farm-box{
+    background:#fff;
+    border-radius:24px;
+    padding:2rem;
+    box-shadow:0 8px 28px rgba(0,0,0,.04);
+    height:100%;
+}
+
+.today-farm-box p{
+    color:#666;
+    line-height:2.2;
+    margin-bottom:0;
+}
+
+/* =========================
+   PROCESS SECTION
+========================= */
+
+.process-card{
+    background:#fff;
+    border-radius:24px;
+    padding:2rem 1.5rem;
+    box-shadow:0 8px 24px rgba(0,0,0,.04);
+    transition:.3s ease;
+    height:100%;
+}
+
+.process-card:hover{
+    transform:translateY(-4px);
+}
+
+.process-card .icon{
+    font-size:2.5rem;
+    margin-bottom:1rem;
+}
+
+.process-card h5{
+    font-weight:700;
+    margin-bottom:1rem;
+}
+
+.process-card p{
+    color:#666;
+    line-height:2;
+    margin-bottom:0;
+}
+
+/* =========================
+   MISSION
+========================= */
+
+.mission-box{
+    background:#f7f5ef;
+    border-radius:28px;
+    padding:3rem;
+    box-shadow:0 8px 24px rgba(0,0,0,.03);
+}
+
+.mission-box p{
+    color:#666;
+    line-height:2.3;
+    margin-bottom:0;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 991px){
+
+    .brand-story-section{
+        margin-bottom:70px;
+    }
+
+    .story-image{
+        height:240px;
+    }
+
+    .story-content{
+        text-align:center;
+        padding:0 8px;
+    }
+
+    .story-title{
+        font-size:1.7rem;
+    }
+
+    .story-content p{
+        font-size:.95rem;
+        line-height:2.15;
+    }
+
+    .story-card-premium{
+        padding:1.7rem 1.2rem;
+    }
+
+    .story-title-modern{
+        font-size:1.5rem;
+        line-height:1.8;
+    }
+
+    .lead-text{
+        font-size:.95rem;
+        line-height:2.1;
+    }
+
+    .today-farm-box{
+        padding:1.5rem;
+        text-align:center;
+    }
+
+    .mission-box{
+        padding:2rem 1.5rem;
+        text-align:center;
+    }
+
+}

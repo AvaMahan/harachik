@@ -1,0 +1,270 @@
+
+/* معرفی وزن معمولی */
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('../fonts/Vazirmatn-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* معرفی وزن ضخیم */
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('../fonts/Vazirmatn-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* اعمال فونت به کل سایت */
+* {
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+}
+
+body {
+    line-height: 1.8; /* این خط باعث می‌شود متن‌های فارسی خیلی شیک‌تر و خواناتر شوند */
+       direction: rtl;
+    margin: 0;
+    font-family: 'Vazirmatn', sans-serif;
+    overflow-x: hidden !important;
+       padding-top:80px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+ul { margin: 0; padding: 0; list-style: none; }
+a { text-decoration: none; }
+
+/* =========================
+   هدر و منوی دسکتاپ
+========================= */
+.main-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    width: 100%;
+    height: 80px;
+
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    z-index: 9999;
+
+    border-bottom: 1px solid rgba(0,0,0,.08);
+
+    transition: all .35s ease;
+        box-shadow:
+    0 5px 25px rgba(0,0,0,.06);
+  
+}
+
+.header-inner {
+    max-width:1400px;
+    margin:auto;
+    height:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 30px;
+}
+
+.logo-box { display: flex; align-items: center; }
+.logo-box img { height: 70px; display: block; }
+
+.main-menu { list-style: none; display: flex; gap: 32px; margin: 0; padding: 0; }
+.main-menu li { margin: 0; }
+.main-menu a {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1d4e2b;
+    transition: .25s ease;
+}
+.main-menu a:hover, .main-menu a.active { color: #4d7c63; }
+
+/* =========================
+   همبرگر منو
+========================= */
+.menu-checkbox { display: none; }
+.menu-toggle {
+    display: none;
+    width: 32px;
+    height: 26px;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 2000;
+}
+.menu-toggle span {
+    display: block;
+    height: 3px;
+    background: #1d4e2b;
+    border-radius: 4px;
+    transition: .35s;
+}
+
+.menu-checkbox:checked + .menu-toggle span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+.menu-checkbox:checked + .menu-toggle span:nth-child(2) { opacity: 0; }
+.menu-checkbox:checked + .menu-toggle span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+
+/* =========================
+   واکنش‌گرایی (Mobile)
+========================= */
+/* ظرف نگهدارنده برای ایجاد فاصله */
+.cart-wrapper {
+   /* فاصله از لوگو */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* استایل آیکون سبد خرید */
+.cart-icon-styled {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background-color: #f8f9fa; /* پس‌زمینه بسیار روشن برای دیده شدن */
+    border-radius: 12px;
+    color: #2d4f3b; /* رنگ سبز برند شما */
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* افکت هاور جذاب */
+.cart-icon-styled:hover {
+    background-color: #2d4f3b;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(45, 79, 59, 0.2);
+}
+
+/* نشانگر تعداد محصولات (قرمز جذاب) */
+.cart-badge-styled {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff3b30; /* قرمز درخشان iOS-style */
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 10px;
+    border: 2px solid #ffffff; /* ایجاد تضاد با آیکون */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+/* ایجاد چیدمان ردیفی برای بخش سمت چپ */
+.left-header-assets {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* 👈 فاصله دقیق بین سبد خرید و لوگو را اینجا تنظیم کنید */
+}
+
+/* حذف مارجین‌های اضافی که باعث تداخل می‌شدند */
+.cart-wrapper, .logo-box {
+    margin: 0 !important; 
+    padding: 0 !important;
+}
+
+/* مطمئن شدن از اینکه در کل هدر، منو و بخش چپ از هم فاصله می‌گیرند */
+.header-inner {
+    display: flex;
+    justify-content: space-between; /* منو سمت راست، لوگو و سبد سمت چپ */
+    align-items: center;
+}
+
+/* استایل آیکون (برای زیباتر شدن مطابق تصویر قبلی) */
+.cart-icon-styled {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    color: #2d4f3b;
+    font-size: 1.3rem;
+    text-decoration: none;
+}
+
+
+/* تنظیمات مخصوص موبایل */
+
+@media (max-width: 768px) {
+      .cart-wrapper {
+        margin-left: 15px; /* کمی فاصله کمتر در موبایل */
+    }
+    .cart-icon-styled {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .header-inner { flex-direction: row-reverse; position: relative; }
+    .menu-toggle { display: flex; order: 3; }
+    .logo-box { order: 1; }
+
+    .main-menu {
+        position: absolute;
+        top: 76px;
+        right: 50%;
+        transform: translateX(50%);
+        width: 94%;
+        background: rgba(255, 255, 255, 0.90);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        text-align: center;
+        max-height: 0;
+        overflow: hidden;
+        transition: 0.35s ease;
+        border-radius: 0 0 22px 22px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.10), 0 14px 28px rgba(0,0,0,0.07), 0 28px 40px rgba(0,0,0,0.05);
+        border-top: 1px solid rgba(255, 255, 255, 0.35);
+        padding-top: 0px;
+        z-index: 999;
+    }
+
+    .main-menu li { padding: 16px 0; border-bottom: 1px solid #f1f1f1; }
+    .main-menu li:last-child { border-bottom: 0; padding-bottom: 22px; }
+    .menu-checkbox:checked ~ .main-menu { max-height: 420px; }
+    .main-menu a { display: block; font-size: 16px; font-weight: 500; color: #222; }
+
+    /* فوتر در موبایل */
+    .container.w-75 { width: 95% !important; }
+    .footer-content { text-align: center !important; }
+    .footer-section .col-12 { margin-bottom: 25px; margin-top: 0; padding-top: 0; }
+    .footer-desc { text-align: center; line-height: 2; }
+}
+
+/* =========================
+   استایل فوتر
+========================= */
+.footer-section { background-color: #E6EADB; direction: rtl; font-size: 0.9rem; color: #444; }
+.footer-title { color: #0e3b21; font-weight: 800; margin-bottom: 20px; }
+.footer-links a, .footer-menu a { color: #4a5d4a; text-decoration: none; transition: 0.3s; }
+.footer-links a:hover, .footer-menu a:hover { color: #0e3b21; }
+.footer-desc { color: #666; font-size: 0.85rem; line-height: 1.6; }
+.footer-logo { width: 80px; }
+
+.footer-bottom-bar {
+    background-color: #0e3b21;
+    color: #fff;
+    padding: 15px 10px;
+    border-radius: 20px 20px 0 0;
+    margin-top: 10px;
+}

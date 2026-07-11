@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- SEO -->
+    <title>{% block title %}{% endblock %}</title>
+
+    <meta name="description"
+          content="{% block meta_description %}فروشگاه اینترنتی عرقیجات گیاهی و محصولات طبیعی{% endblock %}">
+
+    <meta name="robots" content="index,follow">
+
+    <link rel="canonical"
+          href="{% block canonical %}{{ request.build_absolute_uri }}{% endblock %}">
+
+    <!-- Open Graph -->
+    <meta property="og:locale" content="fa_IR">
+    <meta property="og:type" content="website">
+    <meta property="og:title"
+          content="{% block og_title %}{% block title_og %}{% endblock %}{% endblock %}">
+    <meta property="og:description"
+          content="{% block og_description %}فروشگاه اینترنتی عرقیجات گیاهی و محصولات طبیعی{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:site_name" content="هراچیک ">
+
+    {% block og_image %}
+    	<meta property="og:image" content="{% static 'images/logo.png' %}">
+    {% endblock %}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    {% comment %}
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+    {% endcomment %}
+
+    {% block extra_meta %}{% endblock %}
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/home.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/aboute.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'products/css/base_home.css' %}">
+
+    <link rel="stylesheet" href="{% static 'products/css/products_list.css' %}">
+
+    <link rel="stylesheet" href="{% static 'products/css/products_detail.css' %}">
+
+    <link rel="stylesheet" href="{% static 'orders/css/order.css' %}">
+
+    <link rel="stylesheet" href="{% static 'orders/css/product_offcanvas.css' %}">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    {% block extra_css %}{% endblock %}
+
+</head>
+
+<body>
+
+    {% include 'partials/header.html' %}
+
+    {% block content %}{% endblock %}
+
+    {% include 'partials/footer.html' %}
+
+    {% include "orders/_product_offcanvas.html" %}
+    {% include "orders/_cart_offcanvas.html" %}
+    {% include "orders/_order_modal.html" %}
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'js/product-guide.js' %}"></script>
+
+    <script src="{% static 'orders/js/order-modal.js' %}"></script>
+
+    <script src="{% static 'orders/js/cart.js' %}"></script>
+
+    <script src="{% static 'products/js/product.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

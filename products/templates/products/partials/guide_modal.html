@@ -1,0 +1,58 @@
+<div id="guideModal" class="hr-modal" style="display:none;">
+    <div class="hr-modal-content">
+        <!-- هدر ثابت -->
+        <div class="hr-modal-header">
+            <span class="hr-close" onclick="closeGuideModal()">&times;</span>
+            <h5 id="modal-product-name" style="margin: 0; color: #2d5a27; font-weight: bold;"></h5>
+            <small style="color: #666;">دانستنی‌های سلامت محصول</small>
+        </div>
+
+        <!-- نوار تب‌ها (با قابلیت اسکرول افقی در صورت نیاز) -->
+        <div class="hr-tabs-nav">
+            <button class="tab-link active" onclick="openTab(event, 'tab-benefits')">خواص</button>
+            <button class="tab-link" onclick="openTab(event, 'tab-usage')">نحوه مصرف</button>
+            <button class="tab-link" onclick="openTab(event, 'tab-time')">زمان مصرف</button>
+            <button class="tab-link" onclick="openTab(event, 'tab-storage')">نگهداری</button>
+        </div>
+
+        <!-- بدنه اسکرول‌شونده محتوا -->
+        <div class="hr-modal-body">
+            <!-- تب خواص -->
+            <div id="tab-benefits" class="tab-content active">
+                <div class="info-card">
+                    <span class="info-badge">🍃 خواص درمانی</span>
+                    <p id="modal-benefits" class="info-p"></p>
+                </div>
+            </div>
+
+            <!-- تب نحوه مصرف -->
+            <div id="tab-usage" class="tab-content">
+                <div class="info-card">
+                    <span class="info-badge">🥄 دستورالعمل استفاده</span>
+                    <p id="modal-usage" class="info-p"></p>
+                </div>
+            </div>
+
+            <!-- تب زمان مصرف -->
+            <div id="tab-time" class="tab-content">
+                <div class="info-card">
+                    <span class="info-badge">⏰ بهترین زمان تاثیر</span>
+                    <p id="modal-time" class="info-p"></p>
+                </div>
+            </div>
+
+            <!-- تب شرایط نگهداری -->
+            <div id="tab-storage" class="tab-content">
+                <div class="info-card">
+                    <span class="info-badge">❄️ شرایط نگهداری</span>
+                    <p id="modal-storage" class="info-p"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- فوتر ثابت -->
+        <div class="hr-modal-footer">
+            <button class="dk-btn btn-primary-dk w-100" onclick="closeGuideModal()">متوجه شدم</button>
+        </div>
+    </div>
+</div>

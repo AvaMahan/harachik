@@ -1,0 +1,8 @@
+
+<div class="row">
+    {% for product in products %}
+        {% include "products/product_card.html" %}
+    {% empty %}
+        <p>محصولی یافت نشد</p>
+    {% endfor %}
+</div>

@@ -1,0 +1,124 @@
+ {% load humanize %}
+{% load static %}
+
+ <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="dk-product-card-horizontal h-100 d-flex flex-column shadow-sm position-relative">
+
+                {% if product.discount_price %}
+                <span class="discount-badge ribbon-tilt position-absolute">تخفیف ویژه</span>
+                {% endif %}
+
+                <!-- بخش افقی: متن راست / تصویر چپ -->
+                <div class="dk-product-body d-flex align-items-stretch p-3">
+
+                    <!-- متن (سمت راست) -->
+                    <div class="dk-product-info flex-grow-1 d-flex flex-column me-3 order-1 order-md-2">
+
+                        <!-- نام محصول -->
+                           <a href="{% url 'products:product_detail' product.slug %}" class="text-decoration-none">
+                        <p class="dk-title mb-1 text-end">
+                            {{ product.name }}
+                            {% if product.volume_liter %}
+                                {{ product.volume_liter }} لیتری
+                            {% endif %}
+                        </p></a>
+
+                        <!-- مزایا -->
+                        <div class="dk-benefits-box small mb-2 text-end">
+                            {% if product.benefits.exists %}
+                                <ul class="list-unstyled mb-0">
+                                    {% for benefit in product.benefits.all|slice:":2" %}
+                                        <li>
+                                            {% if benefit.icon %}
+                                                <i class="{{ benefit.icon }} ms-1"></i>
+                                            {% endif %}
+                                            {{ benefit.title }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+
+                        <!-- قیمت -->
+                        <div class="dk-price text-end mb-2">
+                            {% if product.discount_price %}
+                                <span class="old-price d-block">{{ product.price|intcomma }} تومان</span>
+                                <span class="new-price d-block mt-1">{{ product.discount_price|intcomma }} تومان</span>
+                            {% else %}
+                                <span class="normal-price">{{ product.price|intcomma }} تومان</span>
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+                    <!-- تصویر محصول (سمت چپ) -->
+                     <a href="{% url 'products:product_detail' product.slug %}" class="text-decoration-none">
+                    <div class="dk-product-image-col d-flex align-items-center justify-content-center">
+                        <div
+                           class="dk-product-image-wrapper d-flex align-items-center justify-content-center bg-white rounded">
+
+                            {% if product.image %}
+                            
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="dk-product-image img-fluid">
+                            {% else %}
+                                <img src="{% static 'products/images/bottle-transparent.png' %}"
+                                     alt="{{ product.name }}" class="dk-product-image img-fluid">
+                                    
+                            {% endif %}
+                    </div>
+                    </div>
+                     </a>
+
+                </div>
+
+                <!-- دکمه‌ها پایین کارت -->
+               <div class="dk-card-actions mt-auto d-flex gap-2 p-3 pt-0">
+
+    <!-- دکمه اصلاح شده: حالا به جای لینک، یک مودال را صدا می‌زند -->
+<button type="button" 
+    class="dk-btn btn-outline-dk flex-fill py-2 small text-center"
+    onclick="openGuideModal(
+        '{{ product.name|escapejs }}', 
+        '{% for b in product.benefits.all %}{{ b.title }}{% if not forloop.last %}، {% endif %}{% endfor %}', 
+        '{{ product.usage_instruction|escapejs }}', 
+        '{{ product.usage_time|escapejs }}', 
+        '{{ product.storage_condition|escapejs }}'
+    )">
+    خواص و نحوه مصرف
+</button>
+
+
+    {% if product.stock > 0 %}
+<button
+  type="button"
+  class="dk-btn btn-primary-dk flex-fill py-2 small open-product-offcanvas"
+  data-product-id="{{ product.id }}"
+  data-product-name="{{ product.name }}"
+  data-prices='[
+  {% for cp in product.active_container_prices %}
+  {
+    "id": {{ cp.id }},
+    "label":"{{ cp.get_container_type_display }}",
+    "price":{{ cp.price }},
+    "volume":{{ cp.container_type|cut:"L" }}
+
+  }{% if not forloop.last %},{% endif %}
+  {% endfor %}
+  ]'
+
+>
+ثبت سفارش
+</button>
+
+
+    {% else %}
+    <button type="button" class="dk-btn btn-secondary-dk flex-fill py-2 small" disabled>
+        ناموجود
+    </button>
+    {% endif %}
+
+</div>
+
+
+            </div>
+        </div>

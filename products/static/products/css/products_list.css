@@ -1,0 +1,868 @@
+
+
+/* =========================
+   کارت محصول افقی – طرح طراح
+   ========================= */
+
+/* desktop */
+
+/* کارت عمومی (استایل پایه) */
+.dk-product-card,
+.dk-product-card-horizontal {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #f1f1f1;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);;
+    display: flex;
+    flex-direction: column;
+    transition: .25s ease;
+}
+
+.dk-product-card:hover,
+.dk-product-card-horizontal:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+}
+
+/* ======================
+   چیدمان افقی کارت
+   متن راست – تصویر چپ
+   ====================== */
+
+.dk-product-body {
+    display: flex;
+    flex-direction: row-reverse;   /* برای RTL: متن راست، عکس چپ */
+    align-items: center;
+    padding: 14px 18px 10px;
+    gap: 16px;
+}
+
+/* متن سمت راست */
+.dk-product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+/* تصویر سمت چپ */
+.dk-product-image-wrapper {
+    flex: 0 0 30%;
+    max-width: 30%;
+    min-width: 120px;
+
+    height: 150px;
+    background: #fafafa;
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;    /* برای حالت شناور */
+    overflow:visible;     /* عکس بتواند کمی بیرون بزند */
+}
+
+.dk-product-image {
+    width: 125%;           /* عکس بزرگ‌تر */
+    height: 100%;
+    max-width: none;       /* حذف محدودیت 100% */
+    max-height: none;
+
+    object-fit: contain;
+
+    position: absolute;     
+ left: 1px;
+    border-radius: 14px;
+    transition: 0.3s ease;
+}
+
+
+.dk-product-card-horizontal:hover .dk-product-image {
+    transform: scale(1.03);
+}
+
+/* ======================
+   عنوان، مزایا، قیمت‌ها
+   ====================== */
+
+/* عنوان محصول */
+.dk-title {
+    color: #0f5132;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    white-space: nowrap;
+}
+
+/* زیرعنوان / مزایا */
+.dk-benefits-box {
+     font-size: 0.85rem;
+    color: #7a7a7a;      /* خاکستری متوسط، نه خیلی کمرنگ */
+    font-weight: 400;
+    line-height: 1.6;
+}
+.dk-benefits-box ul {
+    margin-bottom: 0;
+    padding-right: 1rem;
+}
+.dk-benefits-box li {
+    margin-bottom: 2px;
+}
+
+/* قیمت‌ها */
+.dk-price {
+    margin-top: auto;            /* به پایین ستون متن بچسبد */
+    text-align: right;
+    margin-bottom: 6px;
+}
+
+.old-price {
+   font-size: 0.8rem !important;
+    color: #b3b3b3;      /* روشن‌تر از متن توضیح */
+    text-decoration: line-through;
+    font-weight: 400;
+}
+.new-price {
+   font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f9d58;
+}
+.normal-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f9d58;
+}
+/* ======================
+   Badge تخفیف
+   ====================== */
+.discount-badge {
+    background: linear-gradient(45deg, #ff4fa3, #ff7aa2);
+    color: #fff;
+    font-size: 0.8rem;
+    padding:2px;
+    border-radius: 999px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* روبان مایل روی گوشه تصویر */
+.ribbon-tilt {
+    top: 6px;              /* کمی بالاتر، نزدیک‌تر به لبه‌ی بالای تصویر */
+    left: -0.6rem;         /* کمی کمتر بیرون بیاد */
+    right: auto;
+    transform: rotate(-14deg);  /* زاویه ملایم‌تر */
+    transform-origin: left center;
+    z-index: 3;
+   
+}
+
+
+
+/* ======================
+   دکمه‌ها (پایین کارت)
+   ====================== */
+
+.dk-card-actions {
+    padding: 0 18px 14px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* پایه همه دکمه‌ها */
+.dk-btn {
+    border-radius: 999px;
+    cursor: pointer;
+    transition: .25s;
+    font-size: .9rem;
+    white-space: nowrap;
+}
+
+/* دکمه سبز اصلی – ثبت سفارش */
+.btn-primary-dk {
+    background: #0c511b;
+    border-color: #0c511b;
+    color: #ffffff;
+    padding: 6px 22px;
+    box-shadow: 0 4px 12px rgba(12,81,27,0.3);
+    border: none;
+}
+.btn-primary-dk:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(12,81,27,0.45);
+}
+
+/* دکمه راهنمای مصرف – سبک‌تر */
+.btn-outline-dk {
+    background-color: #fff0f5 !important; /* یک صورتی خیلی ملایم (LavenderBlush) */
+    color: #d14a72 !important;             /* یک صورتی پررنگ‌تر برای متن (خوانایی) */
+    border: 1px solid #ffcad9 !important; /* حاشیه صورتی کمرنگ برای ظرافت */
+    transition: all 0.3s ease;
+    padding: 6px 16px;
+    font-weight: 400;
+}
+.btn-outline-dk:hover {
+    background-color: #ffe4eb !important;
+    border-color: #ffcad9 !important;
+}
+
+/* دکمه ناموجود */
+.btn-secondary-dk {
+    background: #f3f3f3;
+    border: 1px solid #e0e0e0;
+    color: #888888;
+}
+
+/* ======================
+   Hover تصویر (اختیاری)
+   ====================== */
+
+.dk-product-card-horizontal:hover .dk-product-image {
+    transform: scale(1.03);
+}
+
+
+/* ======================
+  لیست محصولات ریسپانسیو موبایل
+   ====================== */
+@media (max-width: 576px) {
+    /* ۱. بدنه اصلی کارت: تغییر به حالت افقی */
+    .dk-product-card {
+        display: flex !important;
+        flex-direction: row-reverse !important; /* عکس راست، متن چپ */
+        flex-wrap: wrap; /* برای اینکه دکمه‌ها بتوانند به ردیف پایین بروند */
+        padding: 12px !important;
+        align-items: flex-start;
+        height: auto !important;
+    }
+
+    /* ۲. کادر عکس در موبایل */
+    .dk-product-image-wrapper {
+        flex: 0 0 38% !important; /* اختصاص ۴۰ درصد عرض به عکس */
+        max-width: 40% !important;
+        min-width: 100px !important;
+        height: 120px !important; /* ارتفاع کمتر برای ظرافت */
+        background: #fff !important; /* یا همان رنگ کرم روشن */
+        border-radius: 12px !important;
+        margin-left: 0 !important;
+        margin-bottom: 0 !important;
+        position: relative;
+        overflow: visible !important; /* اجازه برای حالت شناور */
+    }
+
+    /* ۳. تنظیم عکس محصول (بزرگ و شناور) */
+    .dk-product-image {
+        width: 140% !important; /* بزرگتر از کادر برای جذابیت */
+        height:auto !important;
+        max-height: 130px !important;
+        position: absolute !important;
+        left: 0px !important; /* تنظیم فاصله از راست */
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+       
+    }
+
+    .discount-badge {
+    position: absolute !important;
+    top: 2px !important;
+    left: -6px !important;
+    right: auto !important;
+
+    font-size: 9px !important;
+    padding: 3px 8px !important;
+    z-index: 10 !important;
+    width: auto !important;
+    white-space: nowrap !important;
+    border-radius: 6px;
+}
+
+
+    /* ۴. بخش اطلاعات محصول (نام و قیمت) */
+    .dk-product-info {
+        flex: 0 0 60% !important; /* ۶۰ درصد باقی‌مانده برای متن */
+        max-width: 60% !important;
+        padding-right: 12px !important; /* فاصله از عکس */
+        text-align: right !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .dk-title {
+        font-size: 0.95rem !important;
+        margin-bottom: 8px !important;
+        font-weight: bold;
+    }
+
+    /* لیست مزایا در موبایل (کوچک‌تر) */
+    .dk-product-info ul, .dk-product-info li {
+        font-size: 11px !important;
+        margin-bottom: 2px !important;
+        list-style: none;
+        padding-right: 0;
+    }
+
+    /* ۵. بخش قیمت */
+    .dk-price {
+        margin-top: 10px !important;
+    }
+
+    .old-price { font-size: 11px !important; }
+    .new-price { font-size: 1.1rem !important; }
+
+    /* ۶. دکمه‌ها (در یک ردیف زیر عکس و متن) */
+    .dk-card-actions {
+        flex: 0 0 100% !important; /* اشغال کل عرض در ردیف پایین */
+        display: flex !important;
+        gap: 8px !important;
+       margin-top: 8px !important;     /* از 15px → 8px */
+       padding-top: 4px !important;
+    }
+
+    .dk-btn {
+        flex: 1 !important; /* تقسیم مساوی فضا بین دو دکمه */
+        padding: 8px !important;
+        font-size: 12px !important;
+        border-radius: 10px !important;
+    }
+
+    /* ۷. اصلاح باکس تخفیف ویژه در موبایل */
+
+}
+
+/* سکشن اصلی */
+.rose-benefits {
+    padding-top: 10px;
+
+    /* فاصله از پایین سکشن */
+    background-color: #ffffff;
+    font-family: 'Tahoma', 'Arial', sans-serif;
+    /* در صورت نیاز، فونت را تغییر دهید */
+}
+
+/* ردیف تیتر */
+.rose-benefits .title-row {
+    margin-bottom: 25px;
+    /* تنظیم فاصله تیتر از کارت‌ها */
+}
+
+/* تیتر با خطوط کناری */
+.section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2e4a21;
+    /* رنگ سبز تیره تیتر */
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.6;
+    margin: 0;
+
+
+}
+
+.section-title::before,
+.section-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e0e0e0;
+    /* رنگ خطوط کناری */
+}
+
+.section-title::before {
+    margin-left: 20px;
+}
+
+.section-title::after {
+    margin-right: 20px;
+}
+
+/* کارت اصلی */
+/* کانتینر اصلی آیکون - کادر سبز مربعی */
+.benefit-icon {
+    border-radius: 18px;
+    /* گردی لبه‌ها */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto 15px;
+    padding: 0;
+
+    /* حذف هرگونه بوردر اضافی */
+}
+
+/* خودِ آیکون داخل کادر */
+.benefit-icon img {
+    width: 58px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: invert(21%) sepia(29%) saturate(952%) hue-rotate(63deg) brightness(95%) contrast(91%) drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.benefit-card:hover .benefit-icon img {
+    transform: scale(1.15) rotate(5deg); /* کمی چرخش و بزرگنمایی */
+}
+/* کارت اصلی برای هماهنگی بیشتر */
+.benefit-card {
+    background-color: #f7f7f2;
+    border-radius: 25px;
+    padding: 10px 15px;
+    text-align: center;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+/* عنوان و متن */
+.benefit-title {
+    color: #2e4a21;
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.benefit-desc {
+    color: #666;
+    font-size: 13px;
+    line-height: 1.8;
+}
+/* modal */
+/* تنظیمات ظرف اصلی (پس‌زمینه تیره) */
+/* --- سیستم مودال راهنمای محصول - نسخه حرفه‌ای و جذاب --- */
+.hr-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7); /* تیرگی بیشتر برای تمرکز روی مودال */
+    backdrop-filter: blur(6px); /* مات کردن پشت صفحه */
+}
+
+.hr-modal-content {
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 30px 30px 0 0; /* گردی بیشتر در موبایل */
+    width: 100%;
+    max-width: 500px;
+    height: 90vh; /* کمی کوتاه‌تر برای زیبایی بیشتر */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
+    animation: hrSlideUp 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes hrSlideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@media (min-width: 768px) {
+    .hr-modal-content {
+        position: relative;
+        margin: 5vh auto;
+        height: auto;
+        max-height: 85vh;
+        border-radius: 25px;
+        width: 90%;
+        bottom: auto;
+    }
+}
+
+/* هدر مدرن */
+.hr-modal-header {
+    padding: 25px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    background: linear-gradient(to bottom, #f9fbf9, #ffffff);
+    flex-shrink: 0;
+    text-align: center;
+}
+
+#modal-product-name {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #1b4332;
+    margin-bottom: 4px;
+}
+
+.modal-subtitle {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* نوار تب‌ها با طراحی کپسولی */
+.hr-tabs-nav{
+  display:flex;
+  gap:10px;
+  padding:10px 12px;
+  background:#f6f8f6;
+  border-bottom:1px solid #e7eee7;
+  border-radius:14px;
+  margin: 8px 12px;
+}
+
+.tab-link{
+  flex:1;                 /* مساوی */
+  min-width:0;            /* جلوگیری از فشار عجیب */
+  height:40px;            /* یکدست */
+  padding:0 12px;         /* عمودی ثابت، افقی مناسب */
+  border:1px solid #e6ece6;
+  border-radius:999px;    /* pill واقعی */
+  background:linear-gradient(180deg,#ffffff,#f1f6f1);
+  color:#6b6b6b;
+  font-size:0.92rem;
+  font-weight:700;
+  line-height:40px;       /* متن دقیق وسط */
+  text-align:center;
+  cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+  white-space:nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+
+.tab-link:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,.07);
+  color:#2f6b45;
+}
+
+.tab-link.active{
+  border-color:transparent;
+  background:linear-gradient(135deg,#2f6b45,#4f8b63);
+  color:#fff;
+  box-shadow:0 10px 22px rgba(47,107,69,.28);
+}
+
+.tab-link:active{ transform: scale(.98); }
+
+.tab-link:active {
+    transform: scale(0.98);
+}
+
+
+/* بدنه و اسکرول نرم */
+.hr-modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+    background-color: #fff;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* کارت‌های لیست شده (جایگزین info-card قدیمی) */
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.benefits-list li {
+      direction: rtl; /* راست به چپ بودن محتوا */
+    display: flex;
+    flex-direction: row; /* آیکون و متن در یک ردیف */
+    align-items: center;
+    justify-content: flex-start; /* چیدمان از راست */
+    gap: 12px;
+    padding: 10px;
+    background: #fdfdfd;
+    border: 1px solid #f0f0f0;
+    margin-bottom: 12px;
+    border-radius: 18px;
+    transition: all 0.2s ease;
+    animation: listEntry 0.4s ease forwards;
+    opacity: 0;
+}
+
+@keyframes listEntry {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.benefits-list li:hover {
+    border-right: 5px solid #2d6a4f;
+    background: #f9fbf9;
+}
+
+.check-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.item-text {
+    line-height: 1.7;
+    color: #444;
+    font-size: 0.95rem;
+}
+
+/* فوتر و دکمه شیک */
+.hr-modal-footer {
+    padding: 18px 20px;
+    border-top: 1px solid #eee;
+    background-color: #fff;
+    flex-shrink: 0;
+}
+
+.hr-close {
+    width: 100%;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%);
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem !important;
+   cursor: pointer !important;
+    box-shadow: 0 5px 15px rgba(45, 106, 79, 0.3);
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.hr-close:active {
+    transform: scale(.98);
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* responsive modal */
+@media (max-width: 768px) {
+    .hr-tabs-nav {
+        gap: 5px; /* فاصله بین تب‌ها را کمتر می‌کنیم */
+        padding: 8px 5px; /* پدینگ اطراف را کم می‌کنیم */
+        justify-content: space-between; /* پخش کردن تب‌ها در کل عرض */
+    }
+
+    .tab-link {
+        flex: 1; /* همه تب‌ها فضای مساوی بگیرند */
+        min-width: 0; /* اجازه فشرده شدن تا حد نیاز */
+        font-size: 0.8rem; /* فونت را کمی کوچک‌تر می‌کنیم تا جا شود */
+        padding: 0 4px; /* پدینگ داخلی را به حداقل می‌رسانیم */
+        height: 36px; /* ارتفاع را کمی کمتر می‌کنیم */
+        line-height: 36px;
+    }
+}
+
+/* ریسپانسیو برای تبلت و موبایل */
+@media (max-width: 767.98px) {
+    .rose-benefits {
+        padding-top: 10px;
+       
+    }
+
+    .rose-benefits .title-row {
+        margin-bottom: 10px;
+        white-space: nowrap;
+    }
+
+    .section-title {
+        font-size: 16px;
+    }
+
+    .benefit-icon {
+      
+        /* بوردر سبز کمی تیره‌تر */
+        border-radius: 12px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin: 0 auto 14px;
+    }
+
+    /* خود آیکون */
+    .benefit-icon img {
+        width:45px;
+        height:45px;
+        object-fit: contain;
+
+        filter: none;
+        /* خیلی مهم: فیلتر حذف شود */
+    }
+
+    .benefit-title {
+        font-size: 16px;
+    }
+
+    .benefit-desc {
+        font-size: 13px;
+    }
+}
+
+
+
+
+
+/* --- فواید گلاب | نسخه نهایی و مرتب ریسپانسیو موبایل --- */
+@media (max-width: 768px) {
+
+
+
+    .section-title {
+        font-size: 1rem !important;
+        margin-bottom: 2px !important;
+        margin-top: 0;
+    }
+
+    .section-subtitle {
+        font-size: 0.8rem !important;
+        margin-bottom: 0px !important;
+
+    }
+
+
+    .hero-wave {
+        line-height: 0 !important;
+        overflow: visible !important;
+        /* جلوگیری از ناپدید شدن موج */
+    }
+
+    .hero-wave svg {
+        display: block;
+        transform: translateY(6px);
+        /* موج کمی پایین‌تر می‌آید */
+
+    }
+
+
+    .row {
+        margin-top: 0 !important;
+    }
+}
+
+
+
+/* ریسپانسیو کردن  صفحه */
+/* ============================================
+   RESPONSIVE (Mobile)
+============================================ */
+
+/* موبایل کوچک تا 576px */
+@media (max-width: 576px) {
+
+    /* کل کارت محصول */
+    .dk-product-card {
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    /* عکس محصول بزرگ‌تر شود */
+    .dk-product-image-wrapper {
+        padding: 6px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .dk-product-image {
+        height: 160px !important;
+        object-fit: contain;
+    }
+
+    /* عنوان */
+    .dk-title {
+        font-size: 0.85rem;
+        font-weight: 700;
+        min-height: auto;
+        line-height: 1.6;
+    }
+
+    /* لیست خواص */
+
+    /* قیمت */
+    .dk-price {
+        margin-bottom: 6px;
+    }
+
+    .new-price {
+        font-size: 0.95rem;
+    }
+
+    .old-price {
+        font-size: 0.75rem;
+    }
+
+    .normal-price {
+        font-size: 0.95rem;
+    }
+
+    /* استایل وضعیت موجودی */
+    .stock-status {
+        font-size: 0.72rem;
+        padding: 3px 10px;
+        margin-bottom: 10px;
+    }
+
+    /* دکمه‌ها */
+    .dk-card-actions {
+        flex-direction: row;
+        gap: 6px;
+    }
+
+    .dk-btn {
+        font-size: 0.75rem;
+        padding: 7px 10px;
+        height: 40px;
+        border-radius: 14px;
+    }
+
+    /* Badge تخفیف */
+    .discount-badge {
+        font-size: 0.7rem;
+        padding: 3px 10px;
+        top: 8px;
+        right: 8px;
+    }
+
+    /* فاصله بین کارت‌ها */
+    .col-12.col-sm-6.col-md-4.col-lg-3 {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+}
+
+/* ============================================
+   Tablet: 576px تا 768px
+============================================ */
+@media (min-width: 576px) and (max-width: 768px) {
+
+    /* عکس کمی کوچک‌تر از موبایل */
+    .dk-product-image {
+        height: 180px !important;
+    }
+
+    .dk-btn {
+        padding: 8px 14px;
+        font-size: 0.78rem;
+    }
+
+    .discount-badge {
+        font-size: 0.75rem;
+    }
+
+    .dk-title {
+        font-size: 0.95rem;
+    }
+}
+
+/* ============================================
+   Tablet Landscape: 768px تا 992px
+============================================ */
+@media (min-width: 768px) and (max-width: 992px) {
+    .dk-product-image {
+        height: 190px !important;
+    }
+
+}

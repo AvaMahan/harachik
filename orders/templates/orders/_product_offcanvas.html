@@ -1,0 +1,121 @@
+<div class="offcanvas offcanvas-bottom product-offcanvas pt-5"
+     tabindex="-1"
+     id="productOffcanvas" >
+
+    <div class="offcanvas-header border-bottom">
+
+        <div>
+
+            <div class="step-title">
+
+                مرحله ۱ از ۲
+
+            </div>
+
+            <h4 id="offcanvasProductName"
+                class="product-title">
+            </h4>
+
+            <small class="text-muted">
+
+                ظرف موردنظر و تعداد را انتخاب کنید.
+
+            </small>
+
+        </div>
+
+        <button class="btn-close"
+                data-bs-dismiss="offcanvas">
+        </button>
+
+    </div>
+
+    <div class="offcanvas-body">
+
+        <div class="container-list" id="containerCards">
+
+            <!-- توسط جاوااسکریپت ساخته می‌شود -->
+
+        </div>
+
+
+        <div class="summary-card mt-4">
+
+            <div class="summary-title">
+
+                خلاصه انتخاب شما
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>تعداد انتخاب شده</span>
+
+                <strong id="summaryQty">
+
+                    ۰ ظرف
+
+                </strong>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>حجم کل</span>
+
+                <strong>
+
+                    <span id="totalLiters">0</span>
+
+                    لیتر
+
+                </strong>
+
+            </div>
+
+            <div class="summary-row total-price">
+
+                <span>مبلغ تقریبی</span>
+
+                <strong>
+
+                    <span id="totalPrice">
+
+                        0
+
+                    </span>
+
+                    تومان
+
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div id="bulkPriceNotice"
+             class="bulk-alert d-none">
+
+            سفارش بالای ۱۰ لیتر شامل قیمت عمده خواهد بود.
+
+        </div>
+
+
+        <button
+                id="addToCartBtn"
+                class="btn btn-success btn-lg w-100 mt-4">
+
+            <i class="bi bi-cart-plus"></i>
+
+            افزودن به سبد خرید
+
+        </button>
+
+    </div>
+
+</div>
+<div id="toast" class="toast">
+    <i class="bi bi-check-circle-fill"></i>
+    <span>محصول به سبد خرید اضافه شد.</span>
+</div>

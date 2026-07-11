@@ -1,0 +1,43 @@
+{% load static %}
+<header class="main-header">
+  <div class="header-inner">
+
+    <!-- چک‌باکس مخفی -->
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox">
+
+    <!-- دکمه همبرگر -->
+    <label for="menu-checkbox" class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <!-- منو -->
+    <ul class="main-menu">
+      <li><a href="{% url 'products:home' %}" class="active">خانه</a></li>
+      <li><a href="{% url 'products:home' %}#products-show">محصولات</a></li>
+      <li><a href="{% url 'products:home' %}#about-us-section">درباره ما</a></li>
+      <li><a href="{% url 'products:home' %}#film-golab">فرآیند تولید</a></li>
+      <li><a href="{% url 'products:home' %}#footer-section">تماس با ما</a></li>
+    </ul>
+
+    
+           <!-- ✅ دکمه سبد خرید (خارج از منو برای نمایش همیشگی در موبایل) -->
+ <div class="left-header-assets">
+        
+        <div class="cart-wrapper">
+            <a href="#" class="cart-icon-styled"  id="cartBtn">
+                <i class="bi bi-cart3"></i>
+                <span id="cartCount" class="cart-badge-styled">0</span>
+            </a>
+        </div>
+
+        
+    <!-- لوگو -->
+    <div class="logo-box">
+      <img src="{% static 'images/logo.png' %}" alt="لوگو">
+    </div>
+    </div>
+
+  </div>
+</header>

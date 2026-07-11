@@ -1,0 +1,48 @@
+{% extends "base-home.html" %}
+{% load static %}
+
+{% block title %}
+فروشگاه عرقیجات گیاهی هراچیک | خرید مستقیم عرقیات گیاهی
+{% endblock %}
+
+{% block meta_description %}
+خرید انواع عرقیجات گیاهی اصل، عرق نعناع، بیدمشک، کاسنی، گلاب و محصولات طبیعی با ارسال سریع و کیفیت تضمین‌شده.
+{% endblock %}
+
+{% block home_content %}
+
+<div class="container mt-2 mb-4" id="products-show">
+    <!-- عنوان بخش فیلتر -->
+    <div class="remedy-header mb-4">
+        <h3 class="remedy-title">چه مشکلی دارید؟ <span class="remedy-subtitle">محصول مناسب را بر اساس نیازتان پیدا کنید</span></h3>
+    </div>
+
+    <!-- بدنه فیلتر -->
+    <div class="remedy-filter-wrapper">
+        <div class="remedy-filter-scroll">
+            <button class="filter-btn active" data-slug="all">
+                <i class="fas fa-th-large ml-1 "></i> همه محصولات
+            </button>
+            {% for remedy in remedies %}
+                <button class="filter-btn" data-slug="{{ remedy.slug }}">
+                      {% if remedy.icon_class %}
+                <i class="fas {{ remedy.icon_class }} ml-2"></i>
+            {% endif %}
+                    {{ remedy.name }}
+                </button>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+<!-- لیست محصولات -->
+<div class="container" id="product-items-container">
+    {% include "products/_product_list_items.html" %}
+</div>
+
+{% include "products/partials/guide_modal.html" %}
+<script src="{% static 'js/product-filter.js' %}"></script>
+
+{% endblock %}

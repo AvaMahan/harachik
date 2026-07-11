@@ -1,0 +1,80 @@
+{% load static%}
+<!-- Video Section -->
+<section class="video-section" id="film-golab">
+  <div class="row align-items-center">
+    <!-- ستون متن سمت چپ -->
+    <div class="col-lg-5 order-1 order-md-2 video-text">
+      <h2 class="section-title mb-3">روایتی از رشد و تجربه</h2>
+      <p class="section-desc mb-4">
+        این گزارش صدا و سیما، گوشه‌ای از مسیر تولید گل محمدی در روستای دره گل یزد را نشان می‌دهد؛
+        مسیری که از مزرعه آغاز شد و امروز با وسعت و تجربه‌ای بیشتر ادامه دارد.
+      </p>
+
+      <!-- <button class="btn btn-video-custom" data-bs-toggle="modal" data-bs-target="#videoModal">
+        مشاهده ویدیو <span class="play-icon">▶</span>
+      </button> -->
+    </div>
+
+    <!-- ستون تصویر سمت راست -->
+    <div class="col-lg-7 order-2 order-md-1">
+      <div class="video-img-container" data-bs-toggle="modal" data-bs-target="#videoModal">
+        <img src="{% static 'images/vidio-go.png' %}" alt="مزرعه گل محمدی هراجیک" class="img-fluid">
+
+        <!-- لایه متنی -->
+        <div class="text-overlay">
+          <h3>مسیر رشد و شکوفایی</h3>
+          <p>نگاهی به گزارش رسانه ملی از روزهای آغازین</p>
+        </div>
+
+        <!-- دایره پلی -->
+        <div class="play-btn-circle">
+          <span class="play-icon">▶</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Modal -->
+<div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content" style="border-radius:16px; overflow:hidden;">
+      <div class="modal-header">
+        <h5 class="modal-title">پخش ویدیو</h5>
+        <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-0">
+        <!-- ویدیو mp4 -->
+        <video id="modalVideo" controls playsinline preload="metadata"
+               style="width:100%; height:auto; display:block; background:#000;">
+          <source src="{% static 'videos/film.mp4' %}" type="video/mp4">
+          مرورگر شما از ویدیو پشتیبانی نمی‌کند.
+        </video>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Video Control Script -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const modalEl = document.getElementById("videoModal");
+  const videoEl = document.getElementById("modalVideo");
+
+  if (!modalEl || !videoEl) return;
+
+  // باز شد: پخش
+  modalEl.addEventListener("shown.bs.modal", function () {
+    try { videoEl.currentTime = 0; } catch(e) {}
+    const p = videoEl.play();
+    if (p && typeof p.catch === "function") p.catch(() => {});
+  });
+
+  // بسته شد: توقف + ریست
+  modalEl.addEventListener("hidden.bs.modal", function () {
+    try { videoEl.pause(); } catch(e) {}
+    try { videoEl.currentTime = 0; } catch(e) {}
+  });
+});
+</script>

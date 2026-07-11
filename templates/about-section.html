@@ -1,0 +1,33 @@
+{% load static %}
+<section class="about-farm-section  m-4 " id="about-us-section">
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <!-- Text -->
+         <div class="col-lg-6 col-md-6 order-lg-1 order-2 about-farm-content text-center text-md-end">
+    
+    <div class="about-farm-inner ">
+        <h2 class="about-farm-title text-center">درباره مزارع هراجیک 🌿</h2>
+
+        <p class="about-farm-text">
+            مزارع هراجیک در دل طبیعت روستای دره گل استان یزد با آب و هوای معتدل و خاک حاصلخیز،
+            میزبان گل‌های محمدی نفیس است. ما با عشق و احترام به طبیعت، بهترین گل‌ها را برای
+            تولید گلاب خالص و با کیفیت انتخاب می‌کنیم.
+        </p>
+
+        <a href="{%url 'products:about_detail' %}"   class="about-farm-btn">بیشتر بخوانید 🌿</a>
+    </div>
+
+</div>
+
+
+            <!-- Image -->
+            <div class="col-lg-6 col-md-6 mb-4 order-lg-2 order-1 about-farm-img">
+                <img src="{% static 'images/maz.JPG' %}" alt="مزارع گل">
+            </div>
+
+        </div>
+
+    </div>
+</section>
