@@ -64,7 +64,7 @@
 }
 
 .dk-product-image {
-    width: 125%;           /* عکس بزرگ‌تر */
+    width: 110%;           /* عکس بزرگ‌تر */
     height: 100%;
     max-width: none;       /* حذف محدودیت 100% */
     max-height: none;
