@@ -130,5 +130,10 @@ MEDIA_ROOT = BASE_DIR / "media"
 SMS_USERNAME = config("SMS_USERNAME")
 SMS_APIKEY = config("SMS_APIKEY")
 SMS_LINE = config("SMS_LINE")
+SMS_BODY_ID = config("SMS_BODY_ID", cast=int)
+SMS_ORDER_BODY_ID = config(
+    "SMS_ORDER_BODY_ID",
+    cast=int
+)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

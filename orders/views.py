@@ -14,154 +14,143 @@ from django.views.decorators.http import require_POST
 from .models import PhoneVerification 
 from django.utils import timezone
 from datetime import timedelta
+from .sms import (
+    send_verify_sms,
+    send_sms_async
+)
 
 def generate_code():
     return str(random.randint(10000, 99999))
 
-def send_verify_sms(mobile, code):
-
-    username = settings.SMS_USERNAME
-    password = settings.SMS_APIKEY
-    my_line = settings.SMS_LINE
-
-    url = "https://rest.payamak-panel.com/api/SendSMS/SendSMS"
-
-    text = f"کد تایید هراجیک: {code}"
-
-    try:
-
-        requests.post(
-            url,
-            data={
-                "username": username,
-                "password": password,
-                "to": [mobile],
-                "from": my_line,
-                "text": text,
-            },
-            timeout=10
-        )
-
-    except Exception as e:
-        print("OTP SMS ERROR:", e)
-
-
-
-def send_sms_notification(mobile, order_id, full_name):
-
-    username = settings.SMS_USERNAME
-    password = settings.SMS_APIKEY
-    my_line = settings.SMS_LINE
-    
-
-    url = "https://rest.payamak-panel.com/api/SendSMS/SendSMS"
-
-    user_text = f"هراچیک؛ {full_name} عزیز، سفارش شما ثبت شد. به‌زودی با شما تماس می‌گیریم."
-
-    admin_text = f"سفارش جدید ثبت شد!\nنام: {full_name}\nکد سفارش: {order_id}"
-
-    try:
-        user_response = requests.post(
-            url,
-            data={
-                "username": username,
-                "password": password,
-                "to":[mobile] ,
-                "from": my_line,
-                "text": user_text,
-              
-            },
-            timeout=10
-        )
-
-        print("USER SMS:", user_response.text)
-
-        admin_response = requests.post(
-            url,
-            data={
-                "username": username,
-                "password": password,
-                "to": ["09134590122"],
-                "from": my_line,
-                "text": admin_text,
-                
-            },
-            timeout=10
-        )
-        if "RetStatus\":1" in user_response.text:
-            OrderRequest.objects.filter(id=order_id).update(sms_sent=True)
-        else:
-            OrderRequest.objects.filter(id=order_id).update(
-            sms_error=user_response.text
-        )
-
-        print("ADMIN SMS:", admin_response.text)
-    except Exception as e:
-        print("SMS Error:", e)
-
-def send_sms_async(mobile, order_id, full_name):
-    thread = threading.Thread(
-        target=send_sms_notification,
-        args=(mobile, order_id, full_name),
-    )
-    thread.daemon = True
-    thread.start()
-
-
-
-
 # ارسال کد
 
 @require_POST
-
 def send_verify_code(request):
-    mobile = (request.POST.get("mobile") or "").strip()
+
+    mobile = (
+        request.POST.get("mobile") 
+        or ""
+    ).strip()
+
 
     if not mobile:
-        return JsonResponse({"ok": False, "error": "شماره موبایل وارد نشده"})
+
+        return JsonResponse({
+            "ok":False,
+            "error":"شماره موبایل وارد نشده"
+        })
+
 
     if len(mobile) != 11 or not mobile.startswith("09"):
-        return JsonResponse({"ok": False, "error": "شماره موبایل معتبر نیست"})
+
+        return JsonResponse({
+            "ok":False,
+            "error":"شماره موبایل معتبر نیست"
+        })
+
+
+    # ==========================
+    # محدودیت ارسال مجدد
+    # ==========================
+
+    last_verification = PhoneVerification.objects.filter(
+        mobile=mobile
+    ).order_by(
+        "-created_at"
+    ).first()
+
+
+    if last_verification:
+
+
+        diff = timezone.now() - last_verification.created_at
+
+
+        if diff < timedelta(seconds=60):
+
+            remain = 60 - diff.seconds
+
+
+            return JsonResponse({
+
+                "ok":False,
+
+                "error":
+                f"لطفا {remain} ثانیه صبر کنید"
+
+            })
+
+
+    # ==========================
+    # ساخت کد جدید
+    # ==========================
 
     code = generate_code()
-    PhoneVerification.objects.create(mobile=mobile, code=code)
 
-    username = settings.SMS_USERNAME
-    password = settings.SMS_APIKEY
-    my_line = settings.SMS_LINE
-    url = "https://rest.payamak-panel.com/api/SendSMS/SendSMS"
-    text = f"کد تایید هراجیک: {code}"
 
-    try:
-        response = requests.post(
-            url,
-            data={
-                "username": username,
-                "password": password,
-                "to": [mobile],
-                "from": my_line,
-                "text": text,
-            },
-            timeout=10
-        )
 
-        print("SEND OTP RESPONSE:", response.text)
-        
+    # ==========================
+    # باطل کردن کدهای قبلی
+    # ==========================
 
-        if response.status_code != 200:
-            return JsonResponse({
-                "ok": False,
-                "error": "ارسال پیامک ناموفق بود"
-            }, status=500)
+    PhoneVerification.objects.filter(
+        mobile=mobile,
+        is_verified=False
+    ).update(
+        is_verified=True
+    )
 
-        return JsonResponse({"ok": True})
 
-    except Exception as e:
-        print("SEND OTP ERROR:", e)
+
+    # ==========================
+    # ذخیره OTP جدید
+    # ==========================
+
+    PhoneVerification.objects.create(
+
+        mobile=mobile,
+
+        code=code
+
+    )
+
+
+
+    # ==========================
+    # ارسال پیامک الگو
+    # ==========================
+
+    response = send_verify_sms(
+        mobile,
+        code
+    )
+
+
+    if not response:
+
+
         return JsonResponse({
-            "ok": False,
-            "error": "خطا در ارسال پیامک"
-        }, status=500)
+
+            "ok":False,
+
+            "error":"خطا در ارسال پیامک"
+
+        })
+
+
+
+    print(
+        "OTP RESPONSE:",
+        response.text
+    )
+
+
+
+    return JsonResponse({
+
+        "ok":True
+
+    })
 
 
 
@@ -178,10 +167,12 @@ def verify_code_and_create_order(request):
         }, status=400)
 
     verification = PhoneVerification.objects.filter(
-        mobile=mobile,
-        code=code,
-        is_verified=False
-    ).last()
+    mobile=mobile,
+    code=code,
+    is_verified=False
+).order_by(
+    "-created_at"
+).first()
 
     if not verification:
         return JsonResponse({

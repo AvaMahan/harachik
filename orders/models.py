@@ -1,4 +1,6 @@
 
+from datetime import timedelta
+
 from django.db import models
 from django.db import models
 from django.utils import timezone
@@ -8,18 +10,18 @@ from django.utils import timezone
 class PhoneVerification(models.Model):
 
     mobile = models.CharField(max_length=11)
-
     code = models.CharField(max_length=5)
-
-    created_at = models.DateTimeField(auto_now_add=True)
 
     is_verified = models.BooleanField(default=False)
 
-    def is_expired(self):
-        return timezone.now() > self.created_at + timezone.timedelta(minutes=2)
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
-    def __str__(self):
-        return f"{self.mobile} - {self.code}"
+
+    def is_expired(self):
+
+        return timezone.now() > self.created_at + timedelta(minutes=2)
 
 
 

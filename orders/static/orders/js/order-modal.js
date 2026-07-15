@@ -1,4 +1,5 @@
 let pendingFormData = null;
+let otpTimer = null;
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -115,6 +116,7 @@ pendingFormData.append(
         document.getElementById("otpBox").classList.remove("d-none");
         submitBtn.classList.add("d-none"); 
         document.getElementById("otpCode").focus();
+        startOtpTimer();
 
     } catch (error) {
         errEl.textContent = "خطا در ارتباط با سرور";
@@ -189,6 +191,7 @@ document.addEventListener("click", async function (event) {
         errorBox.classList.add("d-none");
         successBox.classList.remove("d-none");
         verifyBtn.classList.add("d-none");
+        otpBox.classList.add("d-none")
          if(orderData.ok){
             localStorage.removeItem("cart");
 
@@ -220,3 +223,111 @@ document.addEventListener("input", function (e) {
 // document.addEventListener("change", function (e) {
 //     if (e.target.id === "containerType") updateOrderSummary();
 // });
+function startOtpTimer(){
+
+    let seconds = 60;
+
+    const btn = document.getElementById("resendOtpBtn");
+
+    if(!btn) return;
+
+
+    // اگر تایمر قبلی وجود دارد متوقف شود
+    if(otpTimer){
+        clearInterval(otpTimer);
+    }
+
+
+    btn.disabled = true;
+
+    btn.textContent = `ارسال مجدد کد (${seconds})`;
+
+
+    otpTimer = setInterval(function(){
+
+
+        seconds--;
+
+
+        btn.textContent = `ارسال مجدد کد (${seconds})`;
+
+
+        if(seconds <= 0){
+
+            clearInterval(otpTimer);
+
+            otpTimer = null;
+
+            btn.disabled = false;
+
+            btn.textContent = "ارسال مجدد کد";
+
+        }
+
+
+    },1000);
+
+}
+
+document.addEventListener("click", async function(e){
+
+    if(!e.target.matches("#resendOtpBtn"))
+        return;
+
+
+    const mobile =
+    document.querySelector('input[name="mobile"]').value.trim();
+
+
+    const btn=e.target;
+
+
+    btn.disabled=true;
+
+
+    try{
+
+        const res = await fetch("/orders/send-code/",{
+
+            method:"POST",
+
+            body:new URLSearchParams({
+                mobile:mobile
+            }),
+
+            headers:{
+                "X-CSRFToken":getCookie("csrftoken")
+            }
+
+        });
+
+
+        const data = await res.json();
+
+
+        if(data.ok){
+
+            document.getElementById("otpCode").value="";
+
+            startOtpTimer();
+
+        }
+        else{
+
+            alert(data.error);
+
+            btn.disabled=false;
+
+        }
+
+
+    }catch(err){
+
+        alert("خطا در ارسال مجدد");
+
+        btn.disabled=false;
+
+    }
+
+
+});
