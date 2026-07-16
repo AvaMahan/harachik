@@ -1,3 +1,4 @@
+
 import threading
 
 import requests
@@ -159,5 +160,5 @@ def send_sms_async(mobile, order_id, full_name):
         target=send_sms_notification,
         args=(mobile, order_id, full_name),
     )
-    thread.daemon = True
+    thread.daemon =False
     thread.start()   
