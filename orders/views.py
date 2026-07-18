@@ -16,7 +16,7 @@ from django.utils import timezone
 from datetime import timedelta
 from .sms import (
     send_verify_sms,
-    send_sms_async
+    send_sms_notification
 )
 
 def generate_code():
@@ -226,19 +226,44 @@ def create_order_request(request):
  
 
 
-    order = OrderRequest.objects.create(
-        full_name=full_name,
-        mobile=mobile,
-        city=city,
-        note=note,
-        cart_data=cart_data,
-   
-        ip_address=request.META.get("REMOTE_ADDR"),
-        user_agent=(request.META.get("HTTP_USER_AGENT", "")[:255]),
-    )
+    try:
 
-    send_sms_async(mobile, order.id, full_name)
+        order = OrderRequest.objects.create(
+            full_name=full_name,
+            mobile=mobile,
+            city=city,
+            note=note,
+            cart_data=cart_data,
+            ip_address=request.META.get("REMOTE_ADDR"),
+            user_agent=request.META.get("HTTP_USER_AGENT", "")[:255],
+        )
 
-    return JsonResponse({"ok": True, "id": order.id})
 
+        print("BEFORE SMS CALL", flush=True)
+
+
+        send_sms_notification(
+            mobile,
+            order.id,
+            full_name
+        )
+
+
+        print("AFTER SMS CALL", flush=True)
+
+
+        return JsonResponse({
+            "ok": True,
+            "id": order.id
+        })
+
+
+    except Exception as e:
+
+        print("ORDER ERROR:", e, flush=True)
+
+        return JsonResponse({
+            "ok": False,
+            "error": "خطا در ثبت سفارش"
+        }, status=500)
 # Create your views here.
