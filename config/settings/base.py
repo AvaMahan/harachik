@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'products',
     'orders',
      'django.contrib.humanize',
+    'django.contrib.sitemaps',
 
 ]
 

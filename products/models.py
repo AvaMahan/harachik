@@ -1,5 +1,6 @@
 from django.db import models
 from slugify import slugify
+from django.urls import reverse
 class Benefit(models.Model):
     title = models.CharField("عنوان عرق",max_length=200)
     icon = models.CharField("ایکون کنار فواید",max_length=100, blank=True, null=True)
@@ -100,6 +101,12 @@ class Product(models.Model):
         if not self.slug:
             self.slug = slugify(self.name, allow_unicode=True)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse(
+        "products:product_detail",
+        kwargs={"slug": self.slug}
+    )
     
     class Meta:
         verbose_name = " محصولات"
