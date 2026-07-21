@@ -4,11 +4,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib.sitemaps.views import sitemap
-from products.sitemaps import ProductSitemap
+from products.sitemaps import ProductSitemap,StaticViewSitemap
 from django.http import HttpResponse
 
 
 sitemaps = {
+    "static": StaticViewSitemap,
     "products": ProductSitemap,
 }
 
