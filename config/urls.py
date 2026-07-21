@@ -22,9 +22,19 @@ from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from products.sitemaps import ProductSitemap
 
+from django.http import HttpResponse
+
 sitemaps = {
     "products": ProductSitemap,
 }
+
+def robots_txt(request):
+    return HttpResponse(
+        "User-agent: *\n"
+        "Allow: /\n\n"
+        "Sitemap: https://golabherachik.ir/sitemap.xml",
+        content_type="text/plain",
+    )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,6 +44,7 @@ urlpatterns = [
     "sitemap.xml",
     sitemap,
     {"sitemaps": sitemaps},
+    path("robots.txt", robots_txt),
     name="django.contrib.sitemaps.views.sitemap",
 ),
 ]
